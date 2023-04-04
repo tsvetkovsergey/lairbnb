@@ -5,15 +5,15 @@ import { IoMdClose } from 'react-icons/io';
 import Button from '../Button';
 
 interface ModalProps {
-  onClose: () => {};
-  onSubmit: () => {};
+  onClose: () => void;
+  onSubmit: () => void;
   actionLabel: string;
   isOpen?: boolean;
   title?: string;
   body?: React.ReactElement;
   footer?: React.ReactElement;
   disabled?: boolean;
-  secondaryAction?: () => {};
+  secondaryAction?: () => void;
   secondaryActionLabel?: string;
 }
 
@@ -130,6 +130,7 @@ const Modal: React.FC<ModalProps> = ({
                     onClick={handleSubmit}
                   />
                 </div>
+                {footer}
               </div>
             </div>
           </div>
