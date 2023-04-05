@@ -94,7 +94,7 @@ const Modal: React.FC<ModalProps> = ({
         >
           {/* CONTENT */}
           <div
-            className={`transition duration-300 h-full ${
+            className={`transform duration-300 h-full ${
               showModal
                 ? 'translate-y-0 opacity-100'
                 : 'translate-y-full opacity-0'
