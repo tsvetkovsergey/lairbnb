@@ -7,3 +7,5 @@ React Icons
 Zustand
 React Hook Form
 React Hot Toast
+Next Auth + Prisma Adapter
+Bcrypt

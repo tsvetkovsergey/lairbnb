@@ -85,22 +85,23 @@ const Modal: React.FC<ModalProps> = ({
             md:w-4/6
             lg:w-3/6
             xl:w-2/5
-            my-6
             mx-auto
             h-full
-            lg:h-auto
-            md:h-auto
             "
+          //   lg:h-auto
+          // md:h-auto
         >
           {/* CONTENT */}
           <div
-            className={`transform duration-300 h-full ${
+            className={`transform duration-300 h-full flex flex-col ${
               showModal
                 ? 'translate-y-0 opacity-100'
                 : 'translate-y-full opacity-0'
             }`}
           >
-            <div className="transition h-full lg:h-auto md:h-auto border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
+            {/* Empty div for extra margin above modal */}
+            <div className="flex-[1_0_1.5rem]"></div>
+            <div className="transition h-full lg:h-auto md:h-auto border-0 rounded-lg shadow-lg relative w-full bg-white outline-none focus:outline-none">
               {/* HEADER */}
               <div className="flex items-center p-6 rounded-t justify-center relative border-b">
                 <button
@@ -133,6 +134,8 @@ const Modal: React.FC<ModalProps> = ({
                 {footer}
               </div>
             </div>
+            {/* Empty div for extra margin under modal */}
+            <div className="flex-[1_0_1.5rem]"></div>
           </div>
         </div>
       </div>
