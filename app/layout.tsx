@@ -7,6 +7,7 @@ import ToasterProvider from './providers/ToasterProvider';
 import getCurrentUser from './actions/getCurrentUser';
 
 import './globals.css';
+import { log } from 'console';
 
 export const metadata = {
   title: 'Lairbnb',
@@ -23,6 +24,7 @@ export default async function RootLayout({
   children: React.ReactNode;
 }) {
   const currentUser = await getCurrentUser();
+
   return (
     <html lang="ru">
       <body className={font.className}>
