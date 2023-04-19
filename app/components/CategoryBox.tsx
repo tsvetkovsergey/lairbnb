@@ -20,18 +20,19 @@ const CategoryBox = ({ id, icon: Icon, label, selected }: CategoryBoxProps) => {
   const handleClick = useCallback(() => {
     let currentQuery = {};
 
+    // Get params from current URL
     if (params) {
       currentQuery = queryString.parse(params.toString());
     }
 
+    // Add new category param to current URL
     const updatedQuery: any = {
       ...currentQuery,
       category: id,
     };
 
     // If you clicked selected category second time
-    // remove selected from params to clear selection
-    // and show all properties
+    // remove category from params to clear selection
     if (params?.get('category') === id) {
       delete updatedQuery.category;
     }
@@ -54,7 +55,7 @@ const CategoryBox = ({ id, icon: Icon, label, selected }: CategoryBoxProps) => {
       }`}
     >
       <Icon size={26} />
-      <div className="font-medium text-sm">{label}</div>
+      <div className="font-medium text-sm w-max">{label}</div>
     </div>
   );
 };

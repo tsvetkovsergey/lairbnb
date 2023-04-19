@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 
 import axios from 'axios';
 import { AiFillGithub } from 'react-icons/ai';
@@ -14,9 +14,11 @@ import Input from '../inputs/Input';
 import { toast } from 'react-hot-toast';
 import Button from '../Button';
 import { signIn } from 'next-auth/react';
+import useLoginModal from '@/app/hooks/useLoginModal';
 
 const RegisterModal = () => {
   const registerModal = useRegisterModal();
+  const loginModal = useLoginModal();
   const [isLoading, setIsLoading] = useState(false);
 
   const {
@@ -44,6 +46,11 @@ const RegisterModal = () => {
         setIsLoading(false);
       });
   };
+
+  const toggleModals = useCallback(() => {
+    registerModal.onClose();
+    loginModal.onOpen();
+  }, [registerModal, loginModal]);
 
   const bodyContent = (
     <div className="flex flex-col gap-4">
@@ -98,7 +105,7 @@ const RegisterModal = () => {
         <div className="flex flex-row items-center gap-2 justify-center">
           <div>Уже есть аккаунт?</div>
           <button
-            onClick={registerModal.onClose}
+            onClick={toggleModals}
             className="text-neutral-800 cursor-pointer hover:underline"
           >
             Войти

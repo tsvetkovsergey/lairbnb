@@ -10,3 +10,10 @@ React Hot Toast
 Next Auth + Prisma Adapter
 Bcrypt
 Query String
+World Countries
+React Select
+Leaflet
+
+### TODO:
+
+Replace Leaflet Map with Yandex Map

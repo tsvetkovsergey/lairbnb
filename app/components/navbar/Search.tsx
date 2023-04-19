@@ -8,10 +8,10 @@ const Search = () => {
       <div className="flex flex-row items-center justify-between">
         <div className="text-sm font-semibold px-6">Искать везде</div>
         <div className="hidden sm:block text-sm font-semibold px-6 border-x flex-1 text-center">
-          Неделя в любое время
+          Неделя
         </div>
         <div className="text-sm pl-6 pr-2 text-gray-600 flex flex-row items-center gap-3">
-          <div className="hidden sm:block">Сколько гостей?</div>
+          <div className="hidden sm:block">Кто едет?</div>
           <div className="p-2 bg-rose-500 rounded-full text-white">
             <BiSearch size={18} />
           </div>

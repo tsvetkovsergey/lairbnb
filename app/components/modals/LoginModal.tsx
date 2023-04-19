@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import axios from 'axios';
 
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
@@ -56,6 +56,11 @@ const LoginModal = () => {
     });
   };
 
+  const toggleModals = useCallback(() => {
+    loginModal.onClose();
+    registerModal.onOpen();
+  }, [registerModal, loginModal]);
+
   const bodyContent = (
     <div className="flex flex-col gap-4">
       <Heading title="Добро пожаловать" subtitle="Войдите в свой аккаунт!" />
@@ -96,12 +101,12 @@ const LoginModal = () => {
       />
       <div className="text-neutral-500 mt-4 font-light text-center">
         <div className="flex flex-row items-center gap-2 justify-center">
-          <div>Уже есть аккаунт?</div>
+          <div>Первый раз на Lairbnb?</div>
           <button
-            onClick={registerModal.onClose}
+            onClick={toggleModals}
             className="text-neutral-800 cursor-pointer hover:underline"
           >
-            Войти
+            Создать аккаунт
           </button>
         </div>
       </div>
