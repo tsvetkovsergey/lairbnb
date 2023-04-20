@@ -13,6 +13,7 @@ Query String
 World Countries
 React Select
 Leaflet
+Uploadcare
 
 ### TODO:
 
