@@ -25,15 +25,27 @@ export default async function getListings(params: GetListingsParams) {
     } = params;
 
     let query: any = {};
-    userId && (query.userId = userId);
-    category && (query.category = category);
+
+    if (userId) {
+      query.userId = userId;
+    }
+
+    if (category) {
+      query.category = category;
+    }
+
     if (guestCount && parseInt(guestCount))
       query.guestCount = { gte: parseInt(guestCount) };
+
     if (roomCount && parseInt(roomCount))
       query.roomCount = { gte: parseInt(roomCount) };
+
     if (bathroomCount && parseInt(bathroomCount))
       query.bathroomCount = { gte: parseInt(bathroomCount) };
-    locationValue && (query.locationValue = locationValue);
+
+    if (locationValue) {
+      query.locationValue = locationValue;
+    }
 
     // Filter out all listings which have a reservation
     // in our desired date range
