@@ -38,7 +38,10 @@ const RegisterModal = () => {
 
     axios
       .post('/api/register', data)
-      .then(() => registerModal.onClose())
+      .then(() => {
+        registerModal.onClose();
+        loginModal.onOpen();
+      })
       .catch((error) => {
         toast.error(error.message);
       })
@@ -87,7 +90,7 @@ const RegisterModal = () => {
   );
 
   const footerContent = (
-    <div className="flex flex-col gap-4 mt-3">
+    <div className="mt-3 flex flex-col gap-4">
       <hr />
       <Button
         outline
@@ -101,12 +104,12 @@ const RegisterModal = () => {
         icon={AiFillGithub}
         onClick={() => signIn('github')}
       />
-      <div className="text-neutral-500 mt-4 font-light text-center">
-        <div className="flex flex-row items-center gap-2 justify-center">
+      <div className="mt-4 text-center font-light text-neutral-500">
+        <div className="flex flex-row items-center justify-center gap-2">
           <div>Уже есть аккаунт?</div>
           <button
             onClick={toggleModals}
-            className="text-neutral-800 cursor-pointer hover:underline"
+            className="cursor-pointer text-neutral-800 hover:underline"
           >
             Войти
           </button>

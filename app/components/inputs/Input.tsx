@@ -1,11 +1,12 @@
 'use client';
 
 import { FieldErrors, FieldValues, UseFormRegister } from 'react-hook-form';
-import { BiDollar } from 'react-icons/bi';
+import { BiRuble } from 'react-icons/bi';
 
 interface InputProps {
   id: string;
   label?: string;
+  value?: string;
   type?: string;
   disabled?: boolean;
   formatPrice?: boolean;
@@ -17,6 +18,7 @@ interface InputProps {
 const Input: React.FC<InputProps> = ({
   id,
   label,
+  value,
   type = 'text',
   disabled,
   formatPrice,
@@ -27,16 +29,14 @@ const Input: React.FC<InputProps> = ({
   return (
     <div className="w-full relative">
       {formatPrice && (
-        <BiDollar
-          size={24}
-          className="text-neutral-700 absolute top-5 left-2"
-        />
+        <BiRuble size={24} className="text-neutral-700 absolute top-5 left-2" />
       )}
       <input
         id={id}
         disabled={disabled}
         {...register(id, { required })}
         placeholder=" "
+        value={value}
         type={type}
         className={`peer w-full p-4 pt-6 font-light bg-white border-2 rounded-md outline-none transition disabled:opacity-70 disabled:cursor-not-allowed ${
           formatPrice ? 'pl-9' : 'pl-4'

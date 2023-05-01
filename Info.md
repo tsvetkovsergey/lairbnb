@@ -13,7 +13,10 @@ Query String
 World Countries
 React Select
 Leaflet
-Uploadcare
+Cloudinary
+Date-fns
+React Date Range
+React Spinners
 
 ### TODO:
 

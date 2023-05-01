@@ -1,23 +1,67 @@
 'use client';
 
+import { useMemo } from 'react';
+import useCountries from '@/app/hooks/useCountries';
+import useSearchModal from '@/app/hooks/useSearchModal';
+import { useSearchParams } from 'next/navigation';
 import { BiSearch } from 'react-icons/bi';
+import { differenceInDays } from 'date-fns';
+import formatLabelForDigit from '@/app/utils/formatLabelForDigit';
 
 const Search = () => {
+  const searchModal = useSearchModal();
+  const params = useSearchParams();
+  const { getByValue } = useCountries();
+
+  const locationValue = params?.get('locationValue');
+  const startDate = params?.get('startDate');
+  const endDate = params?.get('endDate');
+  const guestCount = params?.get('guestCount');
+
+  const locationLabel = useMemo(() => {
+    return locationValue ? getByValue(locationValue)?.label : 'Искать везде';
+  }, [getByValue, locationValue]);
+
+  const durationLabel = useMemo(() => {
+    if (!(startDate && endDate)) {
+      return 'Неделя';
+    }
+
+    let diff = differenceInDays(new Date(endDate), new Date(startDate));
+    !diff && (diff = 1);
+
+    return `${diff} ${formatLabelForDigit(diff, ['день', 'дня', 'дней'])}`;
+  }, [startDate, endDate]);
+
+  const guestLabel = useMemo(() => {
+    if (!guestCount || !parseInt(guestCount)) {
+      return 'Кто едет?';
+    }
+    return `${guestCount} ${formatLabelForDigit(parseInt(guestCount), [
+      'гость',
+      'гостя',
+      'гостей',
+    ])}`;
+  }, [guestCount]);
+
   return (
-    <div className="border w-full md:w-auto py-2 rounded-full shadow-sm hover:shadow-md transition cursor-pointer">
+    <button
+      onClick={searchModal.onOpen}
+      className="w-full cursor-pointer rounded-full border py-2 shadow-sm transition hover:shadow-md md:w-auto"
+    >
       <div className="flex flex-row items-center justify-between">
-        <div className="text-sm font-semibold px-6">Искать везде</div>
-        <div className="hidden sm:block text-sm font-semibold px-6 border-x flex-1 text-center">
-          Неделя
-        </div>
-        <div className="text-sm pl-6 pr-2 text-gray-600 flex flex-row items-center gap-3">
-          <div className="hidden sm:block">Кто едет?</div>
-          <div className="p-2 bg-rose-500 rounded-full text-white">
+        <p className="px-6 text-sm font-semibold">{locationLabel}</p>
+        <p className="hidden flex-1 border-x px-6 text-center text-sm font-semibold sm:block">
+          {durationLabel}
+        </p>
+        <div className="flex flex-row items-center gap-3 pl-6 pr-2 text-sm text-gray-600">
+          <p className="hidden sm:block">{guestLabel}</p>
+          <i className="rounded-full bg-rose-500 p-2 text-white">
             <BiSearch size={18} />
-          </div>
+          </i>
         </div>
       </div>
-    </div>
+    </button>
   );
 };
 
