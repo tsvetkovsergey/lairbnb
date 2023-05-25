@@ -129,12 +129,12 @@ const RentModal = (props: Props) => {
   }, [step]);
 
   let bodyContent = (
-    <div className="flex flex-col gap-8">
+    <>
       <Heading
         title="Что лучше всего описывает Вашу недвижимость?"
         subtitle="Выберите категорию"
       />
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-3 max-h-[50vh] overflow-y-auto">
+      <div className="grid max-h-[50vh] grid-cols-1 gap-3 overflow-y-auto md:grid-cols-2">
         {categories.map((cat) => (
           <div key={cat.id} className="col-span-1">
             <CategoryInput
@@ -147,12 +147,12 @@ const RentModal = (props: Props) => {
           </div>
         ))}
       </div>
-    </div>
+    </>
   );
 
   if (step === STEPS.LOCATION) {
     bodyContent = (
-      <div className="flex flex-col gap-8">
+      <>
         <Heading
           title="Где Ваша недвижимость находится?"
           subtitle="Помогите гостям найти Вас!"
@@ -162,13 +162,13 @@ const RentModal = (props: Props) => {
           onChange={(value) => setCustomValue('location', value)}
         />
         <Map center={location?.latlng} />
-      </div>
+      </>
     );
   }
 
   if (step === STEPS.INFO) {
     bodyContent = (
-      <div className="flex flex-col gap-8">
+      <>
         <Heading
           title="Расскажите немного о Вашем месте жилья"
           subtitle="Какие удобства у Вас есть?"
@@ -193,13 +193,13 @@ const RentModal = (props: Props) => {
           value={bathroomCount}
           onChange={(value) => setCustomValue('bathroomCount', value)}
         />
-      </div>
+      </>
     );
   }
 
   if (step === STEPS.IMAGES) {
     bodyContent = (
-      <div className="flex flex-col gap-8">
+      <>
         <Heading
           title="Добавьте фотографию Вашей недвижимости"
           subtitle="Покажите гостям, как выглядит Ваша недвижимость!"
@@ -208,44 +208,42 @@ const RentModal = (props: Props) => {
           value={imageSrc}
           onChange={(value) => setCustomValue('imageSrc', value)}
         />
-      </div>
+      </>
     );
   }
 
   if (step === STEPS.DESCRIPTION) {
     bodyContent = (
-      <div>
-        <div className="flex flex-col gap-8">
-          <Heading
-            title="Как бы Вы описали свою недвижимость?"
-            subtitle="Опишите коротко и ясно!"
-          />
-          <Input
-            id="title"
-            label="Название"
-            value={title}
-            disabled={isLoading}
-            register={register}
-            errors={errors}
-            required
-          />
-          <hr />
-          <Input
-            id="description"
-            label="Описание"
-            disabled={isLoading}
-            register={register}
-            errors={errors}
-            required
-          />
-        </div>
-      </div>
+      <>
+        <Heading
+          title="Как бы Вы описали свою недвижимость?"
+          subtitle="Опишите коротко и ясно!"
+        />
+        <Input
+          id="title"
+          label="Название"
+          value={title}
+          disabled={isLoading}
+          register={register}
+          errors={errors}
+          required
+        />
+        <hr />
+        <Input
+          id="description"
+          label="Описание"
+          disabled={isLoading}
+          register={register}
+          errors={errors}
+          required
+        />
+      </>
     );
   }
 
   if (step === STEPS.PRICE) {
     bodyContent = (
-      <div className="flex flex-col gap-8">
+      <>
         <Heading
           title="Установите Вашу цену"
           subtitle="Сколько будет стоить одна ночь в Вашем объекте недвижимости?"
@@ -260,9 +258,15 @@ const RentModal = (props: Props) => {
           errors={errors}
           required
         />
-      </div>
+      </>
     );
   }
+
+  bodyContent = (
+    <div key={step} className="flex flex-col gap-8">
+      {bodyContent}
+    </div>
+  );
 
   return (
     <Modal
